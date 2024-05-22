@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Mount the EBS Volume from ENV variable
+echo "Creating docker volumes"
+docker volume create --name=signoz-clickhouse
+docker volume create --name=signoz-query-service
 CLICKHOUSE_DATA_PATH=/var/lib/docker/volumes/signoz-clickhouse
 QUERY_DATA_PATH=/var/lib/docker/volumes/signoz-query-service
 echo "Mounting EBS Volumes"
