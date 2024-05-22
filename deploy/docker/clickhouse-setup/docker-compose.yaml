@@ -110,7 +110,7 @@ services:
       - ./custom-function.xml:/etc/clickhouse-server/custom-function.xml
       - ./clickhouse-cluster.xml:/etc/clickhouse-server/config.d/cluster.xml
       # - ./clickhouse-storage.xml:/etc/clickhouse-server/config.d/storage.xml
-      - ./data/clickhouse/:/var/lib/clickhouse/
+      - signoz-clickhouse:/var/lib/clickhouse/
       - ./user_scripts:/var/lib/clickhouse/user_scripts/
 
   # clickhouse-2:
@@ -177,7 +177,7 @@ services:
     volumes:
       - ./prometheus.yml:/root/config/prometheus.yml
       - ../dashboards:/root/config/dashboards
-      - ./data/signoz/:/var/lib/signoz/
+      - signoz-query-service:/var/lib/signoz/
     environment:
       - ClickHouseUrl=tcp://clickhouse:9000
       - ALERTMANAGER_API_PREFIX=http://alertmanager:9093/api/
@@ -304,3 +304,9 @@ services:
       LOCUST_OPTS: "--headless -u 10 -r 1"
     volumes:
       - ../common/locust-scripts:/locust
+
+volumes:
+  signoz-clickhouse:
+    external: true
+  signoz-query-service:
+    external: true
