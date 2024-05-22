@@ -20,6 +20,6 @@ mount /dev/sdh $CLICKHOUSE_DATA_PATH
 mkdir -p $QUERY_DATA_PATH
 mount /dev/sdi $QUERY_DATA_PATH
 echo "EBS Volume mounted"
-if find $ -maxdepth 0 -empty | read v; then mkfs -t ext4 /dev/sdh; fi
-if find $ -maxdepth 0 -empty | read v; then mkfs -t ext4 /dev/sdi; fi
+if find $CLICKHOUSE_DATA_PATH -maxdepth 0 -empty | read v; then mkfs -t ext4 /dev/sdh; fi
+if find $QUERY_DATA_PATH -maxdepth 0 -empty | read v; then mkfs -t ext4 /dev/sdi; fi
 echo "EBS Volume formatted"
