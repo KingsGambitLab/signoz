@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo yum install amazon-efs-utils -y
 
 # Mount the EBS Volume from ENV variable
 echo "Creating docker volumes"
@@ -15,7 +16,7 @@ aws ec2 attach-volume --region ap-south-1 --volume-id $QUERY_VOLUME_ID --instanc
 echo "EBS Volums attached. Waiting for 10 seconds before mounting."
 sleep 10
 mkdir -p $CLICKHOUSE_DATA_PATH
-mount -t efs -o tls _netdev $CLICKHOUSE_VOLUME_ID:/ $CLICKHOUSE_DATA_PATH
+mount -t efs -o tls $CLICKHOUSE_VOLUME_ID:/ $CLICKHOUSE_DATA_PATH
 mkdir -p $QUERY_DATA_PATH
 mount /dev/sdi $QUERY_DATA_PATH
 echo "EBS Volume mounted"
