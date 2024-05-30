@@ -1,0 +1,2 @@
+include:
+ - 'deploy/docker/clickhouse-setup/docker-compose.yaml'
